@@ -1,5 +1,6 @@
 package br.com.kaikeventura.bdb.model;
 
+import br.com.kaikeventura.bdb.aux.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

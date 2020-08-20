@@ -24,8 +24,8 @@ public class UserDTO implements Serializable {
     private String lastName;
 
     @NotNull(message = "ERROR-06")
-    @JsonProperty("date_of_birth")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonProperty("date_of_birth")
     private LocalDate dateOfBirth;
 
     @NotNull(message = "ERROR-07")

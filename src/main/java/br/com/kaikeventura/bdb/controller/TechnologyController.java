@@ -1,7 +1,8 @@
 package br.com.kaikeventura.bdb.controller;
 
-import br.com.kaikeventura.bdb.dto.UserDTO;
+import br.com.kaikeventura.bdb.dto.TechnologyDTO;
 import br.com.kaikeventura.bdb.model.User;
+import br.com.kaikeventura.bdb.service.impl.TechnologyServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,11 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class TechnologyController {
 
+    private final TechnologyServiceImpl technologyService;
+
     @PostMapping("technologies")
     @PreAuthorize("hasRole('ADMIN')")
-    public Mono<ResponseEntity<User>> createTechnology(@RequestBody @Valid final UserDTO userDTO) {
-        //return Mono.just(new ResponseEntity(userServiceImpl.saveAdmin(userDTO), HttpStatus.CREATED));
-        return null;
+    public Mono<ResponseEntity<User>> createTechnology(@RequestBody @Valid final TechnologyDTO technologyDTO) {
+        return Mono.just(new ResponseEntity(technologyService.saveTechnology(technologyDTO), HttpStatus.CREATED));
     }
 }

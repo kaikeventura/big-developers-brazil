@@ -1,7 +1,7 @@
 package br.com.kaikeventura.bdb.util;
 
 import br.com.kaikeventura.bdb.dto.UserDTO;
-import br.com.kaikeventura.bdb.model.Role;
+import br.com.kaikeventura.bdb.aux.Role;
 import br.com.kaikeventura.bdb.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
