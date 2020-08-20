@@ -5,3 +5,5 @@
 * Spring Security
 * JWT
 * Java 14
+
+Obs.: Em desenvolvimento...
