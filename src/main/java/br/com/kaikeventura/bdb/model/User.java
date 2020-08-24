@@ -3,37 +3,29 @@ package br.com.kaikeventura.bdb.model;
 import br.com.kaikeventura.bdb.aux.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Document
 @Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements UserDetails, Serializable {
+@Builder
+@Document
+public class User extends AbstractModel implements UserDetails, Serializable {
 
     private static final long serialVersionUID = -5099374715924902675L;
-
-    @Id
-    @JsonIgnore
-    @MongoId
-    private String id;
 
     @JsonProperty("name")
     @Field(name = "name")
@@ -63,18 +55,6 @@ public class User implements UserDetails, Serializable {
     @JsonProperty("active")
     @Field(name = "active")
     private Boolean active;
-
-    @JsonProperty("create")
-    @Field(name = "create")
-    private Instant create;
-
-    @JsonProperty("update")
-    @Field(name = "update")
-    private Instant update;
-
-    @JsonProperty("disable")
-    @Field(name = "disable")
-    private Instant disable;
 
     @Override
     @JsonIgnore

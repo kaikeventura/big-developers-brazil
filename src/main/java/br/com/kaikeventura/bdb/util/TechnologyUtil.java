@@ -15,14 +15,10 @@ public class TechnologyUtil {
 
     public Technology toNewTechnology(TechnologyDTO technologyDTO) {
         return new Technology(
-                UUID.randomUUID().toString(),
                 technologyDTO.getName(),
                 technologyDTO.getReleaseDateOf(),
                 technologyDTO.getTechnologyType(),
-                true,
-                clockUtil.instantNow(),
-                null,
-                null
+                true
         );
     }
 }

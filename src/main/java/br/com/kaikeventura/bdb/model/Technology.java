@@ -1,30 +1,24 @@
 package br.com.kaikeventura.bdb.model;
 
 import br.com.kaikeventura.bdb.aux.TechnologyType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.Instant;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-@Document
 @Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Technology {
+@Builder
+@Document
+public class Technology extends AbstractModel implements Serializable {
 
-    @Id
-    @JsonIgnore
-    @MongoId
-    private String id;
+    private static final long serialVersionUID = -4277863826133217427L;
 
     @JsonProperty("name")
     @Field(name = "name")
@@ -42,16 +36,4 @@ public class Technology {
     @JsonProperty("active")
     @Field(name = "active")
     private Boolean active;
-
-    @JsonProperty("create")
-    @Field(name = "create")
-    private Instant create;
-
-    @JsonProperty("update")
-    @Field(name = "update")
-    private Instant update;
-
-    @JsonProperty("disable")
-    @Field(name = "disable")
-    private Instant disable;
 }
