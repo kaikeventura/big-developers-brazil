@@ -1,9 +1,6 @@
 package br.com.kaikeventura.bdb.error;
 
-import br.com.kaikeventura.bdb.error.exception.EmailAlreadyRegisteredException;
-import br.com.kaikeventura.bdb.error.exception.EmailNotFoundException;
-import br.com.kaikeventura.bdb.error.exception.IncorrectCredentialsException;
-import br.com.kaikeventura.bdb.error.exception.TechnologyAlreadyRegisteredException;
+import br.com.kaikeventura.bdb.error.exception.*;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -26,10 +23,10 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleMethodArgumentNotValidException(
-            MethodArgumentNotValidException methodArgumentNotValidException,
+            MethodArgumentNotValidException exception,
             Locale locale
     ) {
-        final String errorCode = methodArgumentNotValidException
+        final String errorCode = exception
                 .getBindingResult()
                 .getAllErrors()
                 .stream()
@@ -49,39 +46,69 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(EmailAlreadyRegisteredException.class)
     public ResponseEntity<ApiError> handleEmailAlreadyRegisteredException(
-            EmailAlreadyRegisteredException emailAlreadyRegisteredException,
+            EmailAlreadyRegisteredException exception,
             Locale locale
     ) {
-        return ResponseEntity.badRequest().body(buildApiError(emailAlreadyRegisteredException.getErrorCode(), locale));
+        return ResponseEntity.badRequest().body(buildApiError(exception.getErrorCode(), locale));
     }
 
     @ExceptionHandler(EmailNotFoundException.class)
     public ResponseEntity<ApiError> handleEmailNotFoundException(
-            EmailNotFoundException emailNotFoundException,
+            EmailNotFoundException exception,
             Locale locale
     ) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(buildApiError(emailNotFoundException.getErrorCode(), locale));
+                .body(buildApiError(exception.getErrorCode(), locale));
     }
 
     @ExceptionHandler(IncorrectCredentialsException.class)
     public ResponseEntity<ApiError> handleIncorrectCredentialsException(
-            IncorrectCredentialsException incorrectCredentialsException,
+            IncorrectCredentialsException exception,
             Locale locale
     ) {
         return ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
-                .body(buildApiError(incorrectCredentialsException.getErrorCode(), locale));
+                .body(buildApiError(exception.getErrorCode(), locale));
     }
 
     @ExceptionHandler(TechnologyAlreadyRegisteredException.class)
     public ResponseEntity<ApiError> handleTechnologyAlreadyRegisteredException(
-            TechnologyAlreadyRegisteredException technologyAlreadyRegisteredException,
+            TechnologyAlreadyRegisteredException exception,
             Locale locale
     ) {
         return ResponseEntity
-                .badRequest().body(buildApiError(technologyAlreadyRegisteredException.getErrorCode(), locale));
+                .badRequest().body(buildApiError(exception.getErrorCode(), locale));
+    }
+
+    @ExceptionHandler(TechnologyNotFoundException.class)
+    public ResponseEntity<ApiError> handleTechnologyNotFoundException(
+            TechnologyNotFoundException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
+    @ExceptionHandler(IncorrectTechnologyTypeException.class)
+    public ResponseEntity<ApiError> handleIncorrectTechnologyTypeException(
+            IncorrectTechnologyTypeException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
+    @ExceptionHandler(BigDeveloperBrazilAlreadyRegisteredException.class)
+    public ResponseEntity<ApiError> handleBigDeveloperBrazilAlreadyRegisteredException(
+            BigDeveloperBrazilAlreadyRegisteredException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(buildApiError(exception.getErrorCode(), locale));
     }
 
     private ApiError buildApiError(String errorCode, Locale locale, String... args) {

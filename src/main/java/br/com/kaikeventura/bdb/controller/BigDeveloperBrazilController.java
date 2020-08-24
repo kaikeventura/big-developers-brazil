@@ -1,7 +1,9 @@
 package br.com.kaikeventura.bdb.controller;
 
 import br.com.kaikeventura.bdb.dto.BigDeveloperBrazilDTO;
+import br.com.kaikeventura.bdb.model.BigDeveloperBrazil;
 import br.com.kaikeventura.bdb.model.User;
+import br.com.kaikeventura.bdb.service.impl.BigDeveloperBrazilServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,13 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class BigDeveloperBrazilController {
 
+    private final BigDeveloperBrazilServiceImpl bigDeveloperBrazilService;
+
     @PostMapping("bdb")
     @PreAuthorize("hasRole('ADMIN')")
-    public Mono<ResponseEntity<User>> createBigDeveloperBrazil(
+    public Mono<ResponseEntity<Mono<ResponseEntity<BigDeveloperBrazil>>>> createBigDeveloperBrazil(
             @Valid @RequestBody final BigDeveloperBrazilDTO bigDeveloperBrazilDTO
     ) {
-
-        return Mono.just(new ResponseEntity(null, HttpStatus.CREATED));
+        return Mono.just(new ResponseEntity(bigDeveloperBrazilService.save(bigDeveloperBrazilDTO), HttpStatus.CREATED));
     }
 }

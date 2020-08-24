@@ -26,7 +26,7 @@ public class TechnologyServiceImpl implements TechnologyService {
     }
 
     private void verifyIfTechnologyIsExists(String name) {
-        technologyRepository.findByName(name).ifPresent(ex -> {
+        technologyRepository.findByNameLikeIgnoreCase(name).ifPresent(ex -> {
             throw new TechnologyAlreadyRegisteredException();
         });
     }
