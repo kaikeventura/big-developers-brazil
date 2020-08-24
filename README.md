@@ -1,6 +1,7 @@
 # Big Developers Brazil
 
-* Sprig Web Flux
+* Spring Boot
+* Spring Web Flux
 * Spring Data MongoDB Reactive
 * Spring Security
 * JWT
