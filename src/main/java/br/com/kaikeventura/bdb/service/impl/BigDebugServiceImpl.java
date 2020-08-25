@@ -86,6 +86,9 @@ public class BigDebugServiceImpl implements BigDebugService {
         if (bigDeveloperBrazil.getBigDebugs().isEmpty()) {
             bigDeveloperBrazil.setBigDebugs(Collections.singletonList(bigDebug));
         }
-        bigDeveloperBrazil.getBigDebugs().add(bigDebug);
+        else {
+            bigDeveloperBrazil.getBigDebugs().add(bigDebug);
+        }
+        bigDeveloperBrazilRepository.save(bigDeveloperBrazil);
     }
 }
