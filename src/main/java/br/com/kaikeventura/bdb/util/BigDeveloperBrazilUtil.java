@@ -16,6 +16,7 @@ public class BigDeveloperBrazilUtil {
                 bigDeveloperBrazilDTO.getName(),
                 bigDeveloperBrazilDTO.getTechnologyType(),
                 toTechnologyState(bigDeveloperBrazilDTO.getTechnologies()),
+                new ArrayList<>(),
                 true
         );
     }

@@ -220,7 +220,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"BDB_2\",\n    \"technology_type\": \"PROGRAMMING_LANGUAGE\",\n    \"technologies\": [\n        \"Java\",\n        \"C#\",\n        \"Python\"\n    ]\n}",
+							"raw": "{\n    \"name\": \"BDB_1\",\n    \"technology_type\": \"PROGRAMMING_LANGUAGE\",\n    \"technologies\": [\n        \"Java\",\n        \"C#\",\n        \"Python\"\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -237,6 +237,51 @@
 								"v1",
 								"admin",
 								"bdb"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Big Debug",
+			"item": [
+				{
+					"name": "Create Big Debug",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"big_debug_6d5ddf35\",\n    \"big_developer_brazil\": \"bdb_1\",\n    \"technologies\": [\n        \"Java\",\n        \"Python\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/admin/big-debug",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"admin",
+								"big-debug"
 							]
 						}
 					},

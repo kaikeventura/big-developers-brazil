@@ -4,7 +4,6 @@ import br.com.kaikeventura.bdb.aux.TechnologyType;
 import br.com.kaikeventura.bdb.dto.BigDeveloperBrazilDTO;
 import br.com.kaikeventura.bdb.error.exception.BigDeveloperBrazilAlreadyRegisteredException;
 import br.com.kaikeventura.bdb.error.exception.IncorrectTechnologyTypeException;
-import br.com.kaikeventura.bdb.error.exception.TechnologyAlreadyRegisteredException;
 import br.com.kaikeventura.bdb.error.exception.TechnologyNotFoundException;
 import br.com.kaikeventura.bdb.model.BigDeveloperBrazil;
 import br.com.kaikeventura.bdb.model.Technology;
@@ -47,7 +46,7 @@ public class BigDeveloperBrazilServiceImpl implements BigDeveloperBrazilService 
 
     private void verifyIfTechnologiesIsValid(List<String> technologies, TechnologyType technologyType) {
         technologies.forEach(tech -> {
-            Optional<Technology> actualTechnology = technologyRepository.findByNameLikeIgnoreCase(tech);
+            final Optional<Technology> actualTechnology = technologyRepository.findByNameLikeIgnoreCase(tech);
             if (actualTechnology.isEmpty()) {
                 throw new TechnologyNotFoundException();
             }

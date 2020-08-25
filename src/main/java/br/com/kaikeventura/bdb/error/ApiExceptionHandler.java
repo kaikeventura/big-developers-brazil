@@ -111,6 +111,46 @@ public class ApiExceptionHandler {
                 .body(buildApiError(exception.getErrorCode(), locale));
     }
 
+    @ExceptionHandler(InvalidBigDeveloperBrazilException.class)
+    public ResponseEntity<ApiError> handleInvalidBigDeveloperBrazilException(
+            InvalidBigDeveloperBrazilException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
+    @ExceptionHandler(BigDebugAlreadyRegisteredException.class)
+    public ResponseEntity<ApiError> handleBigDebugAlreadyRegisteredException(
+            BigDebugAlreadyRegisteredException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
+    @ExceptionHandler(TechnologyAlreadyEliminatedException.class)
+    public ResponseEntity<ApiError> handleTechnologyAlreadyEliminatedException(
+            TechnologyAlreadyEliminatedException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
+    @ExceptionHandler(TechnologyNotAvailableInThisBigDeveloperBrazilException.class)
+    public ResponseEntity<ApiError> handleTechnologyNotAvailableInThisBigDeveloperBrazilException(
+            TechnologyNotAvailableInThisBigDeveloperBrazilException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
     private ApiError buildApiError(String errorCode, Locale locale, String... args) {
         String errorMessage;
 

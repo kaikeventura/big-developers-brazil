@@ -1,6 +1,7 @@
 package br.com.kaikeventura.bdb.model;
 
 import br.com.kaikeventura.bdb.aux.TechnologyType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -30,6 +31,10 @@ public class BigDeveloperBrazil extends AbstractModel implements Serializable {
     @JsonProperty("technologies")
     @Field("technologies")
     private List<TechnologyState> technologies;
+
+    @JsonIgnore
+    @Field(name = "big_debugs")
+    private List<String> bigDebugs;
 
     @JsonProperty("active")
     @Field(name = "active")
