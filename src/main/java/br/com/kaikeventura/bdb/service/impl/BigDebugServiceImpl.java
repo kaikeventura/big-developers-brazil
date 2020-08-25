@@ -16,8 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +30,7 @@ public class BigDebugServiceImpl implements BigDebugService {
     @Override
     public Mono<BigDebug> save(BigDebugDTO bigDebugDTO) {
         verifyIfBigDebugIsExists(bigDebugDTO.getName());
-        verifyIfBigDebugIsValid(bigDebugDTO.getTechnologies(), bigDebugDTO.getBigDeveloperBrazil());
+        verifyIfBigDebugIsValid(bigDebugDTO);
 
         return bigDebugRepositoryReactive.save(bigDebugUtil.toBigDebug(bigDebugDTO));
     }
@@ -42,15 +41,17 @@ public class BigDebugServiceImpl implements BigDebugService {
         });
     }
 
-    private void verifyIfBigDebugIsValid(List<String> technologies, String bigDeveloperBrazil) {
-        BigDeveloperBrazil actualBigDeveloperBrazil = verifyIfBigDeveloperBrazilIsExists(bigDeveloperBrazil);
-        technologies.forEach(tech -> {
+    private void verifyIfBigDebugIsValid(BigDebugDTO bigDebugDTO) {
+        BigDeveloperBrazil actualBigDeveloperBrazil
+                = verifyIfBigDeveloperBrazilIsExists(bigDebugDTO.getBigDeveloperBrazil());
+        bigDebugDTO.getTechnologies().forEach(tech -> {
             if (
                     actualBigDeveloperBrazil
-                    .getTechnologies()
-                    .stream()
-                    .filter(actualTech -> actualTech.getTechnologyName().equals(tech))
-                    .findFirst().isEmpty()
+                            .getTechnologies()
+                            .stream()
+                            .filter(actualTech -> actualTech.getTechnologyName().equals(tech))
+                            .findFirst()
+                            .isEmpty()
             ) {
                 throw new TechnologyNotAvailableInThisBigDeveloperBrazilException();
             }
@@ -64,6 +65,7 @@ public class BigDebugServiceImpl implements BigDebugService {
                 throw new TechnologyAlreadyEliminatedException();
             }
         });
+        updateBigDeveloperBrazil(actualBigDeveloperBrazil, bigDebugDTO.getName());
     }
 
     private BigDeveloperBrazil verifyIfBigDeveloperBrazilIsExists(String bigDeveloperBrazil) {
@@ -78,5 +80,12 @@ public class BigDebugServiceImpl implements BigDebugService {
         }
 
         return actualBigDeveloperBrazil.get();
+    }
+
+    private void updateBigDeveloperBrazil(BigDeveloperBrazil bigDeveloperBrazil, String bigDebug) {
+        if (bigDeveloperBrazil.getBigDebugs().isEmpty()) {
+            bigDeveloperBrazil.setBigDebugs(Collections.singletonList(bigDebug));
+        }
+        bigDeveloperBrazil.getBigDebugs().add(bigDebug);
     }
 }
