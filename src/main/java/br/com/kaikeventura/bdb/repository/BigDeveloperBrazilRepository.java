@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
 
 public interface BigDeveloperBrazilRepository extends MongoRepository<BigDeveloperBrazil, String> {
-    Optional<BigDeveloperBrazil> findByNameLikeIgnoreCase(String name);
+    Optional<BigDeveloperBrazil> findByName(String name);
 }

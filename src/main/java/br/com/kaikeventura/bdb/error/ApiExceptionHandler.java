@@ -161,6 +161,16 @@ public class ApiExceptionHandler {
                 .body(buildApiError(exception.getErrorCode(), locale));
     }
 
+    @ExceptionHandler(BigDebugNotAvailableException.class)
+    public ResponseEntity<ApiError> handleBigDebugNotAvailableException(
+            BigDebugNotAvailableException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
     private ApiError buildApiError(String errorCode, Locale locale, String... args) {
         String errorMessage;
 

@@ -1,6 +1,7 @@
 package br.com.kaikeventura.bdb.service.impl;
 
 import br.com.kaikeventura.bdb.dto.VotingDTO;
+import br.com.kaikeventura.bdb.error.exception.BigDebugNotAvailableException;
 import br.com.kaikeventura.bdb.error.exception.BigDebugNotFoundException;
 import br.com.kaikeventura.bdb.error.exception.TechnologyNotFoundException;
 import br.com.kaikeventura.bdb.model.BigDebug;
@@ -44,6 +45,9 @@ public class VotingServiceImpl implements VotingService {
         Optional<BigDebug> actualBigDebug = bigDebugRepository.findByName(bigDebug);
         if (actualBigDebug.isEmpty()) {
             throw new BigDebugNotFoundException();
+        }
+        if (!actualBigDebug.get().getVisible() || !actualBigDebug.get().getActive()) {
+            throw new BigDebugNotAvailableException();
         }
         return actualBigDebug.get();
     }

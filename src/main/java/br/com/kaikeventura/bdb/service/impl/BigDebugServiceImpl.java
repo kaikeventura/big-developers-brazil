@@ -1,10 +1,7 @@
 package br.com.kaikeventura.bdb.service.impl;
 
 import br.com.kaikeventura.bdb.dto.BigDebugDTO;
-import br.com.kaikeventura.bdb.error.exception.BigDebugAlreadyRegisteredException;
-import br.com.kaikeventura.bdb.error.exception.InvalidBigDeveloperBrazilException;
-import br.com.kaikeventura.bdb.error.exception.TechnologyAlreadyEliminatedException;
-import br.com.kaikeventura.bdb.error.exception.TechnologyNotAvailableInThisBigDeveloperBrazilException;
+import br.com.kaikeventura.bdb.error.exception.*;
 import br.com.kaikeventura.bdb.model.BigDebug;
 import br.com.kaikeventura.bdb.model.BigDeveloperBrazil;
 import br.com.kaikeventura.bdb.repository.BigDebugRepository;
@@ -33,6 +30,31 @@ public class BigDebugServiceImpl implements BigDebugService {
         verifyIfBigDebugIsValid(bigDebugDTO);
 
         return bigDebugRepositoryReactive.save(bigDebugUtil.toBigDebug(bigDebugDTO));
+    }
+
+    @Override
+    public void enableVisibility(String bigDebug) {
+        BigDebug actualBigDebug = getBigDebug(bigDebug);
+        actualBigDebug.setVisible(true);
+
+        bigDebugRepository.save(actualBigDebug);
+    }
+
+    @Override
+    public void disableVisibility(String bigDebug) {
+        BigDebug actualBigDebug = getBigDebug(bigDebug);
+        actualBigDebug.setVisible(false);
+
+        bigDebugRepository.save(actualBigDebug);
+    }
+
+    @Override
+    public void disable(String bigDebug) {
+        BigDebug actualBigDebug = getBigDebug(bigDebug);
+        actualBigDebug.setVisible(false);
+        actualBigDebug.setActive(false);
+
+        bigDebugRepository.save(actualBigDebug);
     }
 
     private void verifyIfBigDebugIsExists(String name) {
@@ -70,7 +92,7 @@ public class BigDebugServiceImpl implements BigDebugService {
 
     private BigDeveloperBrazil verifyIfBigDeveloperBrazilIsExists(String bigDeveloperBrazil) {
         final Optional<BigDeveloperBrazil> actualBigDeveloperBrazil
-                = bigDeveloperBrazilRepository.findByNameLikeIgnoreCase(bigDeveloperBrazil);
+                = bigDeveloperBrazilRepository.findByName(bigDeveloperBrazil);
         if (
                 actualBigDeveloperBrazil.isPresent()
                 && !actualBigDeveloperBrazil.get().getActive()
@@ -90,5 +112,17 @@ public class BigDebugServiceImpl implements BigDebugService {
             bigDeveloperBrazil.getBigDebugs().add(bigDebug);
         }
         bigDeveloperBrazilRepository.save(bigDeveloperBrazil);
+    }
+
+    private BigDebug getBigDebug(String bigDebugName) {
+        Optional<BigDebug> bigDebug = bigDebugRepository.findByName(bigDebugName);
+        if (bigDebug.isEmpty()) {
+            throw new BigDebugNotFoundException();
+        }
+        if (!bigDebug.get().getActive()) {
+            throw new BigDebugNotAvailableException();
+        }
+
+        return bigDebug.get();
     }
 }

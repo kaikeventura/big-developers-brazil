@@ -6,4 +6,7 @@ import reactor.core.publisher.Mono;
 
 public interface BigDebugService {
     Mono<BigDebug> save(BigDebugDTO bigDebugDTO);
+    void enableVisibility(String bigDebug);
+    void disableVisibility(String bigDebug);
+    void disable(String bigDebug);
 }

@@ -39,7 +39,7 @@ public class BigDeveloperBrazilServiceImpl implements BigDeveloperBrazilService 
     }
 
     private void verifyIfBigDeveloperBrazilIsExists(String name) {
-        bigDeveloperBrazilRepository.findByNameLikeIgnoreCase(name).ifPresent(ex -> {
+        bigDeveloperBrazilRepository.findByName(name).ifPresent(ex -> {
             throw new BigDeveloperBrazilAlreadyRegisteredException();
         });
     }
