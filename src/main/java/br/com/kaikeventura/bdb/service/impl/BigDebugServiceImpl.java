@@ -36,7 +36,7 @@ public class BigDebugServiceImpl implements BigDebugService {
     }
 
     private void verifyIfBigDebugIsExists(String name) {
-        bigDebugRepository.findByNameLikeIgnoreCase(name).ifPresent(ex -> {
+        bigDebugRepository.findByName(name).ifPresent(ex -> {
             throw new BigDebugAlreadyRegisteredException();
         });
     }

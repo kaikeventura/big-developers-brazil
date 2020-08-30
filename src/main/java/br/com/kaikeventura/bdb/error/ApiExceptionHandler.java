@@ -151,6 +151,16 @@ public class ApiExceptionHandler {
                 .body(buildApiError(exception.getErrorCode(), locale));
     }
 
+    @ExceptionHandler(BigDebugNotFoundException.class)
+    public ResponseEntity<ApiError> handleBigDebugNotFoundException(
+            BigDebugNotFoundException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
     private ApiError buildApiError(String errorCode, Locale locale, String... args) {
         String errorMessage;
 

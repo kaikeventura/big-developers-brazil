@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void verifyIfEmailIsExists(String email) {
-        userRepository.findByEmailLikeIgnoreCase(email).ifPresent(ex -> {
+        userRepository.findByEmail(email).ifPresent(ex -> {
             throw new EmailAlreadyRegisteredException();
         });
     }

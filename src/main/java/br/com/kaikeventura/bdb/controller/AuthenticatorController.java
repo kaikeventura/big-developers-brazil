@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 
@@ -20,7 +21,7 @@ public class AuthenticatorController {
     private final AuthenticationServiceImpl authenticationService;
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseToken> login(@RequestBody @Valid LoginDTO authenticationDTO) {
-        return ResponseEntity.ok(authenticationService.login(authenticationDTO));
+    public Mono<ResponseEntity<ResponseToken>> login(@RequestBody @Valid LoginDTO authenticationDTO) {
+        return Mono.just(ResponseEntity.ok(authenticationService.login(authenticationDTO)));
     }
 }

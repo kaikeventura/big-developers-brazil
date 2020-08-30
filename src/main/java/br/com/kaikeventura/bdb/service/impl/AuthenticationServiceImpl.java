@@ -23,7 +23,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public ResponseToken login(LoginDTO authenticationDTO) {
-        final Optional<User> user = userRepository.findByEmailLikeIgnoreCase(authenticationDTO.getEmail());
+        final Optional<User> user = userRepository.findByEmail(authenticationDTO.getEmail());
         if (user.isPresent()) {
             if (new BCryptPasswordEncoder().matches(authenticationDTO.getPassword(), user.get().getPassword())) {
                 return new ResponseToken(jwtUtil.generateToken(user.get()));

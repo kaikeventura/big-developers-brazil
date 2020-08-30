@@ -26,15 +26,29 @@ public class BdbApplication {
 
 	@PostConstruct
 	public void start() {
-		if (userRepository.findByEmailLikeIgnoreCase("admin@bdb.com.br").isEmpty()) {
+		if (userRepository.findByEmail("admin@bdb.com").isEmpty()) {
 			userRepository.save(
 					new User(
 							"admin",
 							"admin",
 							LocalDate.parse("1998-01-06"),
-							"admin@bdb.com.br",
+							"admin@bdb.com",
 							new BCryptPasswordEncoder().encode("123"),
 							Arrays.asList(Role.ROLE_ADMIN),
+							true
+					)
+			);
+		}
+
+		if (userRepository.findByEmail("kaike@gmail.com").isEmpty()) {
+			userRepository.save(
+					new User(
+							"Kaike",
+							"Ventura",
+							LocalDate.parse("1998-01-06"),
+							"kaike@gmail.com",
+							new BCryptPasswordEncoder().encode("123"),
+							Arrays.asList(Role.ROLE_USER),
 							true
 					)
 			);
