@@ -49,6 +49,7 @@ public class VotingServiceImpl implements VotingService {
         if (!actualBigDebug.get().getVisible() || !actualBigDebug.get().getActive()) {
             throw new BigDebugNotAvailableException();
         }
+
         return actualBigDebug.get();
     }
 

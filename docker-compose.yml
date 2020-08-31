@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mongo:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - network
+
+  restapi:
+    container_name: big-developer-brazil
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/bdb_db
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: bdb
+    ports:
+      - 8080:8080
+    networks:
+      - network
+    depends_on:
+      - mongo
+
+networks:
+  network:
