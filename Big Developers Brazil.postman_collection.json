@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "9b391d4c-1ef7-426b-bdc3-5124f97fa240",
+		"name": "Big Developers Brazil",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Voting",
+					"item": [
+						{
+							"name": "Register Vote",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"technology_big_debug_id\": \"1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/v1/voting/big_debug_1",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"voting",
+										"big_debug_1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Create User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{$randomFirstName}}\",\n    \"last_name\": \"{{$randomLastName}}\",\n    \"date_of_birth\": \"1998-01-06\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/v1/users",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Create User Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjpbIlJPTEVfQURNSU4iXSwic3ViIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNTk3ODc5Mzg1LCJleHAiOjE1OTc5MDgxODV9.hVnvTlzK1jK0NOh5X9JvkzXerV3Fc9IegdNmacXXxTJV_nJ71WdoETJK8NZ8aiUQZEM0p0WQkQvIq-c0GSWUpw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Kaike\",\n    \"last_name\": \"Ventura\",\n    \"date_of_birth\": \"1998-01-06\",\n    \"email\": \"test4@gmail.com\",\n    \"password\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/v1/admin/users",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"admin",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Technology",
+					"item": [
+						{
+							"name": "Create Technology",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Java\",\n    \"release_date_of\": \"1990-05-01\",\n    \"technology_type\": \"PROGRAMMING_LANGUAGE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/v1/admin/technologies",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"admin",
+										"technologies"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Big Developer Brazil",
+					"item": [
+						{
+							"name": "Create BDB",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"BDB_1\",\n    \"technology_type\": \"PROGRAMMING_LANGUAGE\",\n    \"technologies\": [\n        \"Java\",\n        \"C#\",\n        \"Python\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/v1/admin/bdb",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"admin",
+										"bdb"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Big Debug",
+					"item": [
+						{
+							"name": "Create Big Debug",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"big_debug_1\",\n    \"big_developer_brazil\": \"BDB_1\",\n    \"technologies\": [\n        \"Java\",\n        \"C#\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/v1/admin/big-debug",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"admin",
+										"big-debug"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Enable Visibility Big Debug",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/v1/admin/big-debug/enable/big_debug_1",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"admin",
+										"big-debug",
+										"enable",
+										"big_debug_1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Disable Visibility Big Debug",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/v1/admin/big-debug/disable/big_debug_1",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"admin",
+										"big-debug",
+										"disable",
+										"big_debug_1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Disable Big Debug",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/v1/admin/big-debug/big_debug_1",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"admin",
+										"big-debug",
+										"big_debug_1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d6d49ade-ca3f-46b1-9b5a-dc910f4215cc",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d4102e2-730d-48de-8b65-46263b6083c5",
+								"exec": [
+									"var data = JSON.parse(responseBody)",
+									"pm.environment.set(\"token\", data.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{adm_email}}\",\n    \"password\": \"{{pss_defaut}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/v1/login",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
