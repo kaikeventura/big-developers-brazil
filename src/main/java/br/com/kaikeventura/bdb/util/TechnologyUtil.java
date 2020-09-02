@@ -12,6 +12,7 @@ public class TechnologyUtil {
                 technologyDTO.getName(),
                 technologyDTO.getReleaseDateOf(),
                 technologyDTO.getTechnologyType(),
+                null,
                 true
         );
     }

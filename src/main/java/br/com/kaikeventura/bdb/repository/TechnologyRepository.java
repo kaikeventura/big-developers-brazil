@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
 
 public interface TechnologyRepository extends MongoRepository<Technology, String> {
-    Optional<Technology> findByNameLikeIgnoreCase(String name);
+    Optional<Technology> findByName(String name);
 }

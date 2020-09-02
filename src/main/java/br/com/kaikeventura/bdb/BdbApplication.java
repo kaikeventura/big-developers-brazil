@@ -61,24 +61,28 @@ public class BdbApplication {
 									"Java",
 									LocalDate.parse("1998-01-06"),
 									TechnologyType.PROGRAMMING_LANGUAGE,
+									null,
 									true
 							),
 							new Technology(
 									"Python",
 									LocalDate.parse("1998-01-06"),
 									TechnologyType.PROGRAMMING_LANGUAGE,
+									null,
 									true
 							),
 							new Technology(
 									"C#",
 									LocalDate.parse("1998-01-06"),
 									TechnologyType.PROGRAMMING_LANGUAGE,
+									null,
 									true
 							),
 							new Technology(
 									"Eclipse",
 									LocalDate.parse("1998-01-06"),
 									TechnologyType.IDE,
+									null,
 									true
 							)
 					)

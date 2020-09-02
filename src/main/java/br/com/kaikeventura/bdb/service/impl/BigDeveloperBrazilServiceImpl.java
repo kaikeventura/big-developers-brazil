@@ -46,7 +46,7 @@ public class BigDeveloperBrazilServiceImpl implements BigDeveloperBrazilService 
 
     private void verifyIfTechnologiesIsValid(List<String> technologies, TechnologyType technologyType) {
         technologies.forEach(tech -> {
-            final Optional<Technology> actualTechnology = technologyRepository.findByNameLikeIgnoreCase(tech);
+            final Optional<Technology> actualTechnology = technologyRepository.findByName(tech);
             if (actualTechnology.isEmpty()) {
                 throw new TechnologyNotFoundException();
             }
