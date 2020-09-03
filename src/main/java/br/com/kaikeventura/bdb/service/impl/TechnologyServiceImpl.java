@@ -1,10 +1,7 @@
 package br.com.kaikeventura.bdb.service.impl;
 
 import br.com.kaikeventura.bdb.dto.TechnologyDTO;
-import br.com.kaikeventura.bdb.error.exception.BigDebugNotAvailableException;
-import br.com.kaikeventura.bdb.error.exception.BigDebugNotFoundException;
-import br.com.kaikeventura.bdb.error.exception.RetrievingTechnologyPhotoException;
-import br.com.kaikeventura.bdb.error.exception.TechnologyAlreadyRegisteredException;
+import br.com.kaikeventura.bdb.error.exception.*;
 import br.com.kaikeventura.bdb.model.Technology;
 import br.com.kaikeventura.bdb.repository.TechnologyRepository;
 import br.com.kaikeventura.bdb.repository.TechnologyRepositoryReactive;
@@ -99,10 +96,10 @@ public class TechnologyServiceImpl implements TechnologyService {
     private Technology getTechnology(String technologyName) {
         Optional<Technology> technology = technologyRepository.findByName(technologyName);
         if (technology.isEmpty()) {
-            throw new BigDebugNotFoundException();
+            throw new TechnologyNotFoundException();
         }
         if (!technology.get().getActive()) {
-            throw new BigDebugNotAvailableException();
+            throw new TechnologyNotAvailableInThisBigDeveloperBrazilException();
         }
 
         return technology.get();

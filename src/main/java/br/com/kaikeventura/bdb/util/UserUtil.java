@@ -35,7 +35,7 @@ public class UserUtil {
         );
     }
 
-    private String encodePassword(String password) {
+    public String encodePassword(String password) {
         return new BCryptPasswordEncoder().encode(password);
     }
 }
