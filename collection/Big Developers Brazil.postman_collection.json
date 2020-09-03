@@ -498,6 +498,26 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Forget Password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/v1/users/forget-password/kaike.gnr@hotmail.com",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								"forget-password",
+								"kaike.gnr@hotmail.com"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
