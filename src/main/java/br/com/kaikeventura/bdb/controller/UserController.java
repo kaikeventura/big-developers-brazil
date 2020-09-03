@@ -1,5 +1,6 @@
 package br.com.kaikeventura.bdb.controller;
 
+import br.com.kaikeventura.bdb.dto.UpdateUserPasswordDTO;
 import br.com.kaikeventura.bdb.dto.UserDTO;
 import br.com.kaikeventura.bdb.model.User;
 import br.com.kaikeventura.bdb.service.impl.UserServiceImpl;
@@ -33,6 +34,14 @@ public class UserController {
     @PatchMapping("users/forget-password/{email}")
     public ResponseEntity<Mono<Void>> forgetPassword(@PathVariable("email") final String email) {
         return new ResponseEntity(userServiceImpl.forgetPassword(email), HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("users/update-password")
+    public ResponseEntity<Mono<Void>> updatePassword(
+            @RequestHeader("Authorization") final String token,
+            @RequestBody @Valid final UpdateUserPasswordDTO updateUserPasswordDTO
+    ) {
+        return new ResponseEntity(userServiceImpl.updatePassword(token, updateUserPasswordDTO), HttpStatus.NO_CONTENT);
     }
 
 }

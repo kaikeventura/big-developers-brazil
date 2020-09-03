@@ -82,6 +82,44 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Update Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"old_password\": \"123\",\n    \"new_password\": \"123\",\n    \"confirm_new_password\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/v1/users/update-password",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"update-password"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -129,6 +167,44 @@
 										"v1",
 										"admin",
 										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"old_password\": \"321\",\n    \"new_password\": \"123\",\n    \"confirm_new_password\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local_url}}/v1/users/update-password",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"users",
+										"update-password"
 									]
 								}
 							},

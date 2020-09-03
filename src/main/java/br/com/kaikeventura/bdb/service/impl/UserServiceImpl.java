@@ -1,11 +1,13 @@
 package br.com.kaikeventura.bdb.service.impl;
 
+import br.com.kaikeventura.bdb.dto.UpdateUserPasswordDTO;
 import br.com.kaikeventura.bdb.dto.UserDTO;
 import br.com.kaikeventura.bdb.error.exception.*;
 import br.com.kaikeventura.bdb.model.User;
 import br.com.kaikeventura.bdb.repository.UserRepository;
 import br.com.kaikeventura.bdb.repository.UserRepositoryReactive;
 import br.com.kaikeventura.bdb.service.UserService;
+import br.com.kaikeventura.bdb.util.JWTUtil;
 import br.com.kaikeventura.bdb.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.passay.CharacterData;
@@ -14,6 +16,7 @@ import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -27,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepositoryReactive userRepositoryReactive;
     private final UserUtil userUtil;
     private final JavaMailSender javaMailSender;
+    private final JWTUtil jwtUtil;
 
     @Override
     public Mono<User> saveCommon(UserDTO userDTO) {
@@ -48,6 +52,18 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         javaMailSender.send(buildEmailWithNewPassword(email, newPassword));
+
+        return Mono.empty();
+    }
+
+    @Override
+    public Mono<Void> updatePassword(String token, UpdateUserPasswordDTO updateUserPasswordDTO) {
+        User user = getUser(jwtUtil.getUsernameFromToken(token.replace("Bearer ", "")));
+        userUtil.checkIfNewPasswordIsValid(updateUserPasswordDTO);
+        checkIfOldPasswordIsCorrect(user.getPassword(), updateUserPasswordDTO.getOldPassword());
+        user.setPassword(userUtil.encodePassword(updateUserPasswordDTO.getNewPassword()));
+
+        userRepository.save(user);
 
         return Mono.empty();
     }
@@ -106,5 +122,11 @@ public class UserServiceImpl implements UserService {
         msg.setText(newPassword);
 
         return msg;
+    }
+
+    private void checkIfOldPasswordIsCorrect(String actualPassword, String passwordEntered) {
+        if (!new BCryptPasswordEncoder().matches(passwordEntered, actualPassword)) {
+            throw new PasswordsNotMatchException();
+        }
     }
 }
