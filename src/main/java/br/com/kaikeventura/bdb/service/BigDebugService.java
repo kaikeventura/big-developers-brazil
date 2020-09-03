@@ -9,4 +9,5 @@ public interface BigDebugService {
     void enableVisibility(String bigDebug);
     void disableVisibility(String bigDebug);
     void disable(String bigDebug);
+    Mono<BigDebug> getBigDebugActive();
 }

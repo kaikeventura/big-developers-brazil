@@ -8,6 +8,7 @@ import br.com.kaikeventura.bdb.repository.BigDebugRepository;
 import br.com.kaikeventura.bdb.repository.BigDebugRepositoryReactive;
 import br.com.kaikeventura.bdb.repository.BigDeveloperBrazilRepository;
 import br.com.kaikeventura.bdb.service.BigDebugService;
+import br.com.kaikeventura.bdb.util.BigDebugCacheUtil;
 import br.com.kaikeventura.bdb.util.BigDebugUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class BigDebugServiceImpl implements BigDebugService {
     private final BigDebugRepository bigDebugRepository;
     private final BigDebugUtil bigDebugUtil;
     private final BigDeveloperBrazilRepository bigDeveloperBrazilRepository;
+    private final BigDebugCacheUtil bigDebugCacheUtil;
 
     @Override
     public Mono<BigDebug> save(BigDebugDTO bigDebugDTO) {
@@ -36,6 +38,7 @@ public class BigDebugServiceImpl implements BigDebugService {
     public void enableVisibility(String bigDebug) {
         BigDebug actualBigDebug = getBigDebug(bigDebug);
         actualBigDebug.setVisible(true);
+        bigDebugCacheUtil.putBigDebug(actualBigDebug);
 
         bigDebugRepository.save(actualBigDebug);
     }
@@ -44,6 +47,7 @@ public class BigDebugServiceImpl implements BigDebugService {
     public void disableVisibility(String bigDebug) {
         BigDebug actualBigDebug = getBigDebug(bigDebug);
         actualBigDebug.setVisible(false);
+        bigDebugCacheUtil.deleteBigDebug();
 
         bigDebugRepository.save(actualBigDebug);
     }
@@ -53,8 +57,14 @@ public class BigDebugServiceImpl implements BigDebugService {
         BigDebug actualBigDebug = getBigDebug(bigDebug);
         actualBigDebug.setVisible(false);
         actualBigDebug.setActive(false);
+        bigDebugCacheUtil.deleteBigDebug();
 
         bigDebugRepository.save(actualBigDebug);
+    }
+
+    @Override
+    public Mono<BigDebug> getBigDebugActive() {
+        return Mono.just(bigDebugCacheUtil.getBigDebug());
     }
 
     private void verifyIfBigDebugIsExists(String name) {
