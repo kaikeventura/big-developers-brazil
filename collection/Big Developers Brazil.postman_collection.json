@@ -12,6 +12,35 @@
 					"name": "Voting",
 					"item": [
 						{
+							"name": "Get Big Debug Active",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local_url}}/v1/big-debug/active",
+									"host": [
+										"{{local_url}}"
+									],
+									"path": [
+										"v1",
+										"big-debug",
+										"active"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Register Vote",
 							"request": {
 								"auth": {
