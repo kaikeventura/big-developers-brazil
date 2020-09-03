@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
@@ -31,6 +28,11 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     public Mono<ResponseEntity<User>> createUserAdmin(@RequestBody @Valid final UserDTO userDTO) {
         return Mono.just(new ResponseEntity(userServiceImpl.saveAdmin(userDTO), HttpStatus.CREATED));
+    }
+
+    @PatchMapping("users/forget-password/{email}")
+    public ResponseEntity<Mono<Void>> forgetPassword(@PathVariable("email") final String email) {
+        return new ResponseEntity(userServiceImpl.forgetPassword(email), HttpStatus.NO_CONTENT);
     }
 
 }
