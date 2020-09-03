@@ -29,7 +29,6 @@ public class BigDebugController {
 
     @PatchMapping("admin/big-debug/enable/{bigDebug}")
     @PreAuthorize("hasRole('ADMIN')")
-    @CachePut(value = "big-debug", key = "#bigDebug")
     public Mono<ResponseEntity<BigDebug>> enableVisibilityBigDebug(@PathVariable("bigDebug") final String bigDebug) {
         bigDebugService.enableVisibility(bigDebug);
         return Mono.just(new ResponseEntity(HttpStatus.NO_CONTENT));
@@ -37,7 +36,6 @@ public class BigDebugController {
 
     @PatchMapping("admin/big-debug/disable/{bigDebug}")
     @PreAuthorize("hasRole('ADMIN')")
-    @CachePut(value = "big-debug", key = "#bigDebug")
     public Mono<ResponseEntity<BigDebug>> disableVisibilityBigDebug(@PathVariable("bigDebug") final String bigDebug) {
         bigDebugService.disableVisibility(bigDebug);
         return Mono.just(new ResponseEntity(HttpStatus.NO_CONTENT));
@@ -51,7 +49,6 @@ public class BigDebugController {
     }
 
     @GetMapping("big-debug/active")
-    @Cacheable("big-debug")
     public Mono<ResponseEntity<BigDebug>> bigDebugActive() {
         return Mono.just(new ResponseEntity(bigDebugService.getBigDebugActive(), HttpStatus.OK));
     }
