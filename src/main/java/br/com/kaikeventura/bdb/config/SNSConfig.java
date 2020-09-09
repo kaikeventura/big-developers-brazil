@@ -3,15 +3,15 @@ package br.com.kaikeventura.bdb.config;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.sns.AmazonSNSAsyncClientBuilder;
+import com.amazonaws.services.sns.AmazonSNSClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
-public class S3Config {
+public class SNSConfig {
 
     @Value("${aws.access.key}")
     private String accessKey;
@@ -19,7 +19,7 @@ public class S3Config {
     @Value("${aws.secret.key}")
     private String secretKey;
 
-    @Value("${aws.s3.endpoint}")
+    @Value("${aws.sns.endpoint}")
     private String endpoint;
 
     @Value("${aws.region}")
@@ -27,11 +27,11 @@ public class S3Config {
 
     @Primary
     @Bean
-    public AmazonS3 s3client() {
-        return AmazonS3ClientBuilder.standard()
+    public AmazonSNSClient amazonSNSClient() {
+        return (AmazonSNSClient) AmazonSNSAsyncClientBuilder
+                .standard()
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, region))
                 .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)))
-                .withPathStyleAccessEnabled(true)
                 .build();
     }
 }
