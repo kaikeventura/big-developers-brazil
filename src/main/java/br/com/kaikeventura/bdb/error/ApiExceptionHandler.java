@@ -171,6 +171,36 @@ public class ApiExceptionHandler {
                 .body(buildApiError(exception.getErrorCode(), locale));
     }
 
+    @ExceptionHandler(RetrievingTechnologyPhotoException.class)
+    public ResponseEntity<ApiError> handleRetrievingTechnologyPhotoException(
+            RetrievingTechnologyPhotoException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
+    @ExceptionHandler(DisabledUserException.class)
+    public ResponseEntity<ApiError> handleDisabledUserException(
+            DisabledUserException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
+    @ExceptionHandler(PasswordsNotMatchException.class)
+    public ResponseEntity<ApiError> handlePasswordsNotMatchException(
+            PasswordsNotMatchException exception,
+            Locale locale
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(buildApiError(exception.getErrorCode(), locale));
+    }
+
     private ApiError buildApiError(String errorCode, Locale locale, String... args) {
         String errorMessage;
 

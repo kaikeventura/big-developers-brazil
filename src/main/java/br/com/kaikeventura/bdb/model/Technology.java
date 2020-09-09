@@ -33,6 +33,10 @@ public class Technology extends AbstractModel implements Serializable {
     @Field(name = "technology_type")
     private TechnologyType technologyType;
 
+    @JsonProperty("photo_id")
+    @Field(name = "photo_id")
+    private String photoId;
+
     @JsonProperty("active")
     @Field(name = "active")
     private Boolean active;
