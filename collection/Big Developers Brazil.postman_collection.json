@@ -92,7 +92,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"{{$randomFirstName}}\",\n    \"last_name\": \"{{$randomLastName}}\",\n    \"date_of_birth\": \"1998-01-06\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"123\"\n}",
+									"raw": "{\n    \"name\": \"{{$randomFirstName}}\",\n    \"last_name\": \"{{$randomLastName}}\",\n    \"date_of_birth\": \"1998-01-06\",\n    \"email\": \"kaike916@gmail.com\",\n    \"password\": \"123\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -129,7 +129,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"old_password\": \"123\",\n    \"new_password\": \"123\",\n    \"confirm_new_password\": \"123\"\n}",
+									"raw": "{\n    \"old_password\": \"J(s@4Ja9!g\",\n    \"new_password\": \"123\",\n    \"confirm_new_password\": \"123\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -305,7 +305,7 @@
 										{
 											"key": "photo",
 											"type": "file",
-											"src": "/home/kaike/Downloads/CPTS registro recente.jpg"
+											"src": "/home/kaike/Downloads/1*jkOCjQlkGZjbhWdvh7LfRA.png"
 										}
 									],
 									"options": {
@@ -584,7 +584,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"{{adm_email}}\",\n    \"password\": \"{{pss_defaut}}\"\n}",
+							"raw": "{\n    \"email\": \"{{adm_email}}\",\n    \"password\": \"123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -610,7 +610,7 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{local_url}}/v1/users/forget-password/kaike.gnr@hotmail.com",
+							"raw": "{{local_url}}/v1/users/forget-password/kaike916@gmail.com",
 							"host": [
 								"{{local_url}}"
 							],
@@ -618,7 +618,7 @@
 								"v1",
 								"users",
 								"forget-password",
-								"kaike.gnr@hotmail.com"
+								"kaike916@gmail.com"
 							]
 						}
 					},
